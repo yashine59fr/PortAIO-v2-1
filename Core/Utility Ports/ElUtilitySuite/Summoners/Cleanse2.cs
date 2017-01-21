@@ -358,13 +358,27 @@ namespace ElUtilitySuite.Summoners
         /// <returns></returns>
         private Spell GetBestCleanseItem(GameObject ally, BuffInstance buff)
         {
-            return
-                this.Items.OrderBy(x => x.Priority)
-                    .Where(x => x.WorksOn.Any(y => buff.Type.HasFlag(y)))
-                    .Where(x => ally.IsMe || x.WorksOnAllies)
-                    .Where(x => x.Spell.IsReady() && x.Spell.IsInRange(ally) && x.Spell.Slot != SpellSlot.Unknown)
-                    .Select(item => item.Spell)
-                    .FirstOrDefault();
+            foreach (var item in Items.OrderBy(x => x.Priority))
+            {
+                if (!item.WorksOn.Any(x => buff.Type.HasFlag(x)))
+                {
+                    continue;
+                }
+
+                if (!(ally.IsMe || item.WorksOnAllies))
+                {
+                    continue;
+                }
+
+                if (!item.Spell.IsReady() || !item.Spell.IsInRange(ally) || item.Spell.Slot == SpellSlot.Unknown)
+                {
+                    continue;
+                }
+
+                return item.Spell;
+            }
+
+            return null;
         }
 
         private void OnUpdate(EventArgs args)
@@ -379,21 +393,15 @@ namespace ElUtilitySuite.Summoners
                 return;
             }
 
-            foreach (var ally in HeroManager.Allies.Where(x => x.IsValidTarget(800f, false)))
+            foreach (var ally in HeroManager.Allies.Where(x => x.IsValidTarget(800f, false) || x.IsMe))
             {
                 foreach (var buff in
-                    ally.Buffs.Where(
-                        x =>
-                            this.BuffsToCleanse.Contains(x.Type) && x.Caster.Type == GameObjectType.AIHeroClient
-                            && x.Caster.IsEnemy))
+                    ally.Buffs.Where(x => this.BuffsToCleanse.Contains(x.Type) && x.Caster.Type == GameObjectType.AIHeroClient && x.Caster.IsEnemy))
                 {
                     if (!Menu.Item($"3Cleanse{buff.Type}").IsActive()
                         || Menu.Item("MinDuration").GetValue<Slider>().Value / 1000f > buff.EndTime - buff.StartTime
                         || this.BuffIndexesHandled[ally.NetworkId].Contains(buff.Index)
-                        || Spells.Any(
-                            b =>
-                                buff.Name.Equals(b.Spellname, StringComparison.InvariantCultureIgnoreCase)
-                                || !Menu.Item($"3cleanseon{ally.ChampionName}").IsActive()) || buff.Type == BuffType.Knockback || buff.Type == BuffType.Knockup)
+                        || Spells.Any(b => buff.Name.Equals(b.Spellname, StringComparison.InvariantCultureIgnoreCase) || !Menu.Item($"3cleanseon{ally.ChampionName}").IsActive()) || buff.Type == BuffType.Knockback || buff.Type == BuffType.Knockup)
                     {
                         continue;
                     }
@@ -462,7 +470,6 @@ namespace ElUtilitySuite.Summoners
                             {
                                 continue;
                             }
-
                             cleanseItem.Cast(ally);
                             this.BuffIndexesHandled[ally.NetworkId].Remove(buff.Index);
                         }

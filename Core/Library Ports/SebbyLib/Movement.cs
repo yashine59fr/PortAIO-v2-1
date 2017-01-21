@@ -282,28 +282,13 @@ namespace SebbyLib.Movement
                     input.RangeCheckFrom.Distance(input.Unit.Position, true) >
                     Math.Pow(input.Range + input.RealRadius * 3 / 4, 2))
                 {
-                    result.Hitchance = HitChance.Medium;
+                    //result.Hitchance = HitChance.Medium;
                 }
 
                 if (input.RangeCheckFrom.Distance(result.UnitPosition, true) >
                     Math.Pow(input.Range + (input.Type == SkillshotType.SkillshotCircle ? input.RealRadius : 0), 2))
                 {
                     result.Hitchance = HitChance.OutOfRange;
-                }
-
-                /* This does not need to be handled for the updated predictions, but left as a reference.*/
-                if (input.RangeCheckFrom.Distance(result.CastPosition, true) > Math.Pow(input.Range, 2))
-                {
-                    if (result.Hitchance != HitChance.OutOfRange)
-                    {
-                        result.CastPosition = input.RangeCheckFrom +
-                                              input.Range *
-                                              (result.UnitPosition - input.RangeCheckFrom).To2D().Normalized().To3D();
-                    }
-                    else
-                    {
-                        result.Hitchance = HitChance.OutOfRange;
-                    }
                 }
             }
 

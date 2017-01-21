@@ -293,13 +293,6 @@ namespace SebbyLib.Prediction
             //Check if the unit position is in range
             if (Math.Abs(input.Range - float.MaxValue) > float.Epsilon)
             {
-                if (result.Hitchance >= HitChance.High &&
-                    input.RangeCheckFrom.Distance(input.Unit.Position, true) >
-                    Math.Pow(input.Range + input.RealRadius * 3 / 4, 2))
-                {
-                    result.Hitchance = HitChance.Medium;
-                }
-
                 if (input.RangeCheckFrom.Distance(result.UnitPosition, true) >
                     Math.Pow(input.Range + (input.Type == SkillshotType.SkillshotCircle ? input.RealRadius : 0), 2))
                 {
