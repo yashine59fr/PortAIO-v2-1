@@ -642,7 +642,6 @@
     <Compile Include="Core\AIO Ports\OneKeyToWin_AIO_Sebby\Core\Activator.cs" />
     <Compile Include="Core\AIO Ports\OneKeyToWin_AIO_Sebby\Core\AutoLvlUp.cs" />
     <Compile Include="Core\AIO Ports\OneKeyToWin_AIO_Sebby\Core\ChampionStuff.cs" />
-    <Compile Include="Core\AIO Ports\OneKeyToWin_AIO_Sebby\Core\ImageLoader.cs" />
     <Compile Include="Core\AIO Ports\OneKeyToWin_AIO_Sebby\Core\MissileReturn.cs" />
     <Compile Include="Core\AIO Ports\OneKeyToWin_AIO_Sebby\Core\OKTWdash.cs" />
     <Compile Include="Core\AIO Ports\OneKeyToWin_AIO_Sebby\Core\OKTWdraws.cs" />

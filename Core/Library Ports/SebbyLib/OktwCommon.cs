@@ -221,7 +221,7 @@ namespace SebbyLib
             {
                 foreach (var buff in target.Buffs)
                 {
-                    if (buff.Name.ToLower().Contains(buffName.ToLower()))
+                    if(buff.Name.ToLower().Contains(buffName.ToLower()))
                     {
                         stack = target.GetBuffCount(buff.Name);
                     }
@@ -255,10 +255,10 @@ namespace SebbyLib
                 return enemy.Position;
             }
 
-            foreach (var obj in ObjectManager.Get<Obj_GeneralParticleEmitter>().Where(obj => obj.IsValid && obj.Position.Distance(Player.Position) < range))
+            foreach (var obj in ObjectManager.Get<Obj_GeneralParticleEmitter>().Where(obj => obj.IsValid && obj.Position.Distance(Player.Position) < range ))
             {
                 var name = obj.Name.ToLower();
-
+                
                 if (name.Contains("GateMarker_red.troy".ToLower()) || name.Contains("global_ss_teleport_target_red.troy".ToLower())
                     || name.Contains("R_indicator_red.troy".ToLower()))
                     return obj.Position;
@@ -308,7 +308,7 @@ namespace SebbyLib
                 return true;
             }
             return false;
-
+            
         }
 
         public static void DrawTriangleOKTW(float radius, Vector3 position, System.Drawing.Color color, float bold = 1)
@@ -394,7 +394,7 @@ namespace SebbyLib
             }
             /////////////////  HP prediction
             var targed = args.Target as Obj_AI_Base;
-
+            
             if (targed != null)
             {
                 if (targed.Type == GameObjectType.AIHeroClient && targed.Team != sender.Team && sender.IsMelee)
