@@ -282,7 +282,7 @@ namespace SebbyLib.Movement
                     input.RangeCheckFrom.Distance(input.Unit.Position, true) >
                     Math.Pow(input.Range + input.RealRadius * 3 / 4, 2))
                 {
-                    //result.Hitchance = HitChance.Medium;
+                    result.Hitchance = HitChance.Medium;
                 }
 
                 if (input.RangeCheckFrom.Distance(result.UnitPosition, true) >
