@@ -1946,6 +1946,9 @@
     <Compile Include="Core\Champion Ports\TwistedFate\Gross Gore - Fate\Pred.cs" />
     <Compile Include="Core\Champion Ports\TwistedFate\Gross Gore - Fate\Program.cs" />
     <Compile Include="Core\Champion Ports\TwistedFate\Gross Gore - Fate\Spells.cs" />
+    <Compile Include="Core\Champion Ports\TwistedFate\TwistedFateSharp\Common\CommonAutoLevel.cs" />
+    <Compile Include="Core\Champion Ports\TwistedFate\TwistedFateSharp\Common\CommonBuffManager.cs" />
+    <Compile Include="Core\Champion Ports\TwistedFate\TwistedFateSharp\Common\CommonGeometry.cs" />
     <Compile Include="Core\Champion Ports\Udyr\yetAnotherUdyr\Program.cs" />
     <Compile Include="Core\Champion Ports\Varus\ElVarusRevamped\Components\MyMenu.cs" />
     <Compile Include="Core\Champion Ports\Varus\ElVarusRevamped\Components\SpellManager.cs" />
