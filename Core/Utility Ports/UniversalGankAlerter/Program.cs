@@ -245,7 +245,7 @@ namespace UniversalGankAlerter
                     float dist = _hero.Distance(ObjectManager.Player.Position);
                     return Program.Instance().ShowChampionNames && !_hero.IsDead &&
                            Game.Time - _lineStart < Program.Instance().LineDuration &&
-                           (!_hero.IsVisible || !Render.OnScreen(Drawing.WorldToScreen(_hero.Position))) &&
+                           (!_hero.IsHPBarRendered || !Render.OnScreen(Drawing.WorldToScreen(_hero.Position))) &&
                            dist < Program.Instance().Radius && dist > 300 + textoffset;
                 },
                 Centered = true,
@@ -328,7 +328,7 @@ namespace UniversalGankAlerter
                 }
             }
 
-            if (newDistance < Program.Instance().Radius && _hero.IsVisible)
+            if (newDistance < Program.Instance().Radius && _hero.IsHPBarRendered)
             {
                 if (_distance >= Program.Instance().Radius || !_visible)
                 {
@@ -343,7 +343,7 @@ namespace UniversalGankAlerter
                 }
             }
             _distance = newDistance;
-            _visible = _hero.IsVisible;
+            _visible = _hero.IsHPBarRendered;
         }
 
         private bool IsJungler(AIHeroClient hero)
